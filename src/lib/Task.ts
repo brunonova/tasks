@@ -148,13 +148,14 @@ export default class Task {
         for(let match of this._text.matchAll(DUE_DATE_REGEX)) {
             this.dueDate = match[2];
         }
-        this._text = this._text.replace(DUE_DATE_REGEX, "");
+        this._text = this._text.replace(DUE_DATE_REGEX, " ");
 
         // Search the text for notes
         for(let match of this._text.matchAll(NOTES_REGEX)) {
             this.notes = match[2].replace(/\\\]/g, "]").replace(/\\n/g, "\n");
         }
-        this._text = this._text.replace(NOTES_REGEX, "");
+        this._text = this._text.replace(NOTES_REGEX, " ");
+        this._text = this._text.trim();
     }
 
     public clone() {
@@ -185,7 +186,7 @@ export default class Task {
         if(this.dueDate) line += ` due:${this.dueDate}`;
         if(this.notes) {
             const replaced = this.notes.replace(/\]/g, "\\]").replace(/\n/g, "\\n");
-            line += ` notes:[[[${replaced}]]]`
+            line += ` notes:[[[${replaced}]]]`;
         }
 
         return line;

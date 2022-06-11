@@ -1,0 +1,217 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700');
+
+@mixin light-theme {
+    color-scheme: light;
+
+    --color-background: #fff;
+    --color-font: #000;
+    --color-area: #eee;
+    --color-area-title: #ddd;
+    --color-border: #aaa;
+    --color-hover: #00000018;
+    --color-danger: #c0392b;
+    --color-disabled: #ccc;
+
+    --color-priority-A: #c0392b;
+    --color-priority-B: #d35400;
+    --color-priority-C: #f39c12;
+    --color-priority-D: #27ae60;
+    --color-priority-E: #2980b9;
+}
+
+@mixin dark-theme {
+    color-scheme: dark;
+
+    --color-background: #333;
+    --color-font: #fff;
+    --color-area: #555;
+    --color-area-title: #666;
+    --color-border: #666;
+    --color-hover: #ffffff20;
+    --color-danger: #e74c3c;
+    --color-disabled: #666;
+
+    --color-priority-A: #e74c3c;
+    --color-priority-B: #e67e22;
+    --color-priority-C: #f1c40f;
+    --color-priority-D: #2ecc71;
+    --color-priority-E: #3498db;
+}
+
+:root {
+    @include light-theme();
+    --color-primary: #7cb342;
+
+    --font-family: Ubuntu, sans-serif;
+}
+
+body {
+    @media(prefers-color-scheme: dark) {
+        @include dark-theme();
+    }
+
+    &.light {
+        @include light-theme();
+    }
+
+    &.dark {
+        @include dark-theme();
+    }
+
+    transition: background-color 0.3s, color 0.3s;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-family);
+    background-color: var(--color-background);
+    color: var(--color-font);
+}
+
+.icon-button {
+    background: none;
+    border: none;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    color: var(--color-font);
+    border-radius: 6px;
+    cursor: pointer;
+
+    &:hover {
+        background-color: var(--color-hover);
+    }
+
+    &.btn-danger {
+        color: var(--color-danger);
+    }
+}
+
+input[type="text"],
+input[type="date"],
+textarea {
+    width: 100%;
+    padding: 5px;
+    font-size: 16px;
+    font-weight: normal;
+    color: var(--color-font);
+    background-color: var(--color-background);
+    border: solid 1px var(--color-font);
+    border-radius: 6px;
+}
+textarea {
+    resize: vertical;
+}
+
+input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+}
+
+select {
+    width: 100%;
+    padding: 5px;
+    font-size: 16px;
+    color: var(--color-font);
+    background-color: var(--color-background);
+    border: solid 1px var(--color-font);
+    border-radius: 6px;
+}
+
+.action-buttons {
+    display: flex;
+    position: sticky;
+    bottom: 0;
+    background-color: var(--color-background);
+    font-size: 0;
+
+    & > *:not(:last-child) {
+        margin-right: 10px;
+    }
+}
+
+.buttons {
+    font-size: 0;
+
+    & > * {
+        margin-right: 10px;
+    }
+}
+
+.thin {
+    font-weight: 300;
+}
+
+.priority-item {
+    font-weight: normal;
+    color: var(--color-font);
+}
+
+:not(.completed) {
+    @each $pri in A, B, C, D, E {
+        &.priority-#{$pri} {
+            font-weight: bold;
+            color: var(--color-priority-#{$pri});
+        }
+    }
+}
+
+.overdue {
+    color: var(--color-priority-A) !important;
+    font-weight: bold !important;
+}
+
+.due-today {
+    color: var(--color-priority-B) !important;
+    font-weight: bold !important;
+}
+
+.due-tomorrow {
+    color: var(--color-priority-C) !important;
+    font-weight: bold !important;
+}
+
+.btn {
+    font-size: 16px;
+    border-radius: 6px;
+    padding: 5px 10px;
+    color: var(--color-background);
+    background: var(--color-font);
+    border: solid 1px var(--color-font);
+    transition: all 0.2s;
+    cursor: pointer;
+
+    &:hover {
+        filter: brightness(1.25);
+    }
+
+    &.btn-primary {
+        color: #FFF;
+        border-color: var(--color-primary);
+        background-color: var(--color-primary);
+    }
+
+    &.btn-secondary {
+        color: var(--color-primary);
+        border-color: var(--color-primary);
+        background-color: transparent;
+    }
+
+    &.btn-danger {
+        color: var(--color-danger);
+        border-color: var(--color-danger);
+        background-color: transparent;
+    }
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}

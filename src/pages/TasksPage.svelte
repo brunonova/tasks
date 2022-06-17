@@ -5,7 +5,7 @@
     import { today } from "../lib/stores";
     import Task from "../lib/Task";
     import TasksTable from "../components/TasksTable.svelte";
-    import Dropdown from "./Dropdown.svelte";
+    import Dropdown from "../components/Dropdown.svelte";
     import Layout from "./Layout.svelte";
     import EditTask from "../components/EditTask.svelte";
 
